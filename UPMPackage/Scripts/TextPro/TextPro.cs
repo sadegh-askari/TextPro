@@ -152,6 +152,7 @@ namespace YoYo.UI
         }
         private void ValidateKeyIndex(StringTableCollection table, int keyIndex)
         {
+            return;
             var last = table.SharedData.Entries?.Last();
             if (last != null)
             {
