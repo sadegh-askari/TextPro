@@ -14,11 +14,17 @@ namespace YoYo.UI
         [SerializeField] private LocalizationUser _activeUser;
         [SerializeField] private List<TextProLocalizationSettings> _localizationSettings;
 
+        [SerializeField] private bool _overrideLocalize;
+
 #if UNITY_EDITOR
         [SerializeField] private StringTableCollection _stringTable;
         public StringTableCollection StringTable => _stringTable;
 #endif
-        
+
+        [SerializeField] private string[] _locales;
+        public bool OverrideLocalization => _overrideLocalize;
+        public string[] Locales => _locales;
+
         public int GetLocalizeKeyIndex()
         {
             var settings = GetActiveSettings();

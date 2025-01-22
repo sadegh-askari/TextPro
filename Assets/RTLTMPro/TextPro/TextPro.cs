@@ -51,7 +51,7 @@ namespace YoYo.UI
             get => _numberMode;
         }
 
-        private TextProLocalizationSettings _localizationSettings;
+        private TextProLocalizationCollection _localizationSettings;
 
         protected virtual void Start()
         {
@@ -172,10 +172,10 @@ namespace YoYo.UI
 
         private void ResolveLocalizationSettings()
         {
-            var paths = AssetDatabase.FindAssets($"t:{nameof(TextProLocalizationSettings)}");
+            var paths = AssetDatabase.FindAssets($"t:{nameof(TextProLocalizationCollection)}");
             if (paths is {Length: > 0})
             {
-                _localizationSettings = AssetDatabase.LoadAssetAtPath<TextProLocalizationSettings>(AssetDatabase.GUIDToAssetPath(paths[0]));
+                _localizationSettings = AssetDatabase.LoadAssetAtPath<TextProLocalizationCollection>(AssetDatabase.GUIDToAssetPath(paths[0]));
             }
         }
 
