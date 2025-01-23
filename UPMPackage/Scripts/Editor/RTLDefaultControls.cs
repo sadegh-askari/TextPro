@@ -120,7 +120,7 @@ namespace RTLTMPro
 
         public static GameObject CreateInputField(Resources resources)
         {
-            GameObject root = CreateUIElementRoot("InputField - RTLTMP", s_ThickElementSize);
+            GameObject root = CreateUIElementRoot("InputField - TextPro", s_ThickElementSize);
 
             GameObject textArea = CreateUIObject("Text Area", root);
             GameObject childPlaceholder = CreateUIObject("Placeholder", textArea);
@@ -199,7 +199,7 @@ namespace RTLTMPro
 
         public static GameObject CreateDropdown(Resources resources)
         {
-            GameObject root = CreateUIElementRoot("Dropdown - RTLTMP", s_ThickElementSize);
+            GameObject root = CreateUIElementRoot("Dropdown - TextPro", s_ThickElementSize);
 
             GameObject label = CreateUIObject("Label", root);
             GameObject arrow = CreateUIObject("Arrow", root);

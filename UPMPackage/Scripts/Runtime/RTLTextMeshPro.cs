@@ -1,10 +1,10 @@
-﻿using TMPro;
+﻿using Hexagon.UI;
 using UnityEngine;
 
 namespace RTLTMPro
 {
     [ExecuteInEditMode]
-    public class RTLTextMeshPro : TextMeshProUGUI
+    public class RTLTextMeshPro : TextPro
     {
         // ReSharper disable once InconsistentNaming
 #if TMP_VERSION_2_1_0_OR_NEWER
