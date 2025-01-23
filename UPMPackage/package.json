@@ -1,6 +1,6 @@
 {
   "name": "com.hexagon.textpro",
-  "displayName": "Text Pro",
+  "displayName": "TextPro",
   "version": "3.4.3",
   "unity": "2019.1",
   "description": "This package adds Right-to-left language support to TextMeshPro Unity package. Supports Persian, Arabic and Hebrew.",
