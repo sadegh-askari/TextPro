@@ -40,7 +40,7 @@ namespace RTLTMPro
 
             EditorGUILayout.Space();
             EditorGUI.BeginChangeCheck();
-            EditorGUILayout.PropertyField(originalTextProp, new GUIContent("RTL Text Input Box"));
+            EditorGUILayout.PropertyField(originalTextProp, new GUIContent("TextPro Input Box"));
 
             ListenForZeroWidthNoJoiner();
 
@@ -51,7 +51,7 @@ namespace RTLTMPro
 
             base.OnInspectorGUI();
 
-            foldout = EditorGUILayout.Foldout(foldout, "RTL Settings", TMP_UIStyleManager.boldFoldout);
+            foldout = EditorGUILayout.Foldout(foldout, "TextPro Settings", TMP_UIStyleManager.boldFoldout);
             if (foldout)
             {
                 DrawOptions();

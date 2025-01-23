@@ -1,7 +1,9 @@
 {
     "name": "RTLTMPro",
+    "rootNamespace": "",
     "references": [
-        "Unity.TextMeshPro"
+        "Unity.TextMeshPro",
+        "TextPro"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
@@ -14,6 +16,11 @@
         {
             "name": "com.unity.textmeshpro",
             "expression": "2.1.0",
+            "define": "TMP_VERSION_2_1_0_OR_NEWER"
+        },
+        {
+            "name": "com.unity.ugui",
+            "expression": "2.0.0",
             "define": "TMP_VERSION_2_1_0_OR_NEWER"
         }
     ],

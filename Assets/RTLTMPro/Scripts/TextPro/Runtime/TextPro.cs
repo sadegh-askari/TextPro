@@ -1,90 +1,24 @@
-﻿#if UNITY_EDITOR
-using UnityEditor;
-using UnityEditor.Localization;
-  #endif
+﻿using TMPro;
 
-using System;
-using System.Linq;
+#if UNITY_EDITOR && UNITY_LOCALIZATION
 using System.Text;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Components;
 using UnityEngine.Localization.Metadata;
-using UnityEngine.Localization.Settings;
 using UnityEngine.Localization.Tables;
+#endif
 
-namespace YoYo.UI
+namespace Hexagon.UI
 {
-    public enum NumberMode { Context, English, Persian };
-
-    public abstract class TextPro : MonoBehaviour
+    public class TextPro : TextMeshProUGUI
     {
-        public Action OnLanguageChanged;
-        
-        public string text
-        {
-            set
-            {
-                _text = value;
-                SetText();
-            }
-            get
-            {
-                return _text;
-            }
-        }
-
-        [TextArea(4, 5)]
-        [SerializeField]
-        protected string _text;
-
-        public NumberMode _numberMode;
-
-        public NumberMode NumberMode
-        {
-            set
-            {
-                _numberMode = value;
-                SetText();
-            }
-            get => _numberMode;
-        }
-
+#if UNITY_EDITOR && UNITY_LOCALIZATION
         private TextProLocalizationCollection _localizationSettings;
 
-        protected virtual void Start()
-        {
-            LocalizationSettings.SelectedLocaleChanged += OnSelectedLocaleChanged;
-        }
-
-        protected virtual void OnDestroy()
-        {
-            LocalizationSettings.SelectedLocaleChanged -= OnSelectedLocaleChanged;
-        }
-
-        private void OnSelectedLocaleChanged(Locale newLocale)
-        {
-            OnLanguageChanged?.Invoke();
-        }
-        
-        public virtual void SetText()
-        {
-        }
-
-        public virtual void FindRequiredComponent()
-        {
-        }
-
-        private void Reset()
-        {
-            FindRequiredComponent();
-        }
-        
-        
-
-        #if UNITY_EDITOR
-        [ContextMenu("Localize")]
+        [ContextMenu("Localize TextPro")]
         private void Localize()
         {
             var stringEvent = GetComponent<LocalizeStringEvent>();
@@ -100,13 +34,17 @@ namespace YoYo.UI
                 var setStringMethod = GetType().GetProperty("text")?.GetSetMethod();
                 if (setStringMethod != null)
                 {
-                    var methodDelegate = System.Delegate.CreateDelegate(typeof(UnityAction<string>), this, setStringMethod) as UnityAction<string>;
-                    UnityEditor.Events.UnityEventTools.AddPersistentListener(stringEvent.OnUpdateString, methodDelegate);
+                    var methodDelegate =
+                        System.Delegate.CreateDelegate(typeof(UnityAction<string>), this, setStringMethod) as
+                            UnityAction<string>;
+                    UnityEditor.Events.UnityEventTools.AddPersistentListener(stringEvent.OnUpdateString,
+                        methodDelegate);
                 }
             }
 
             EditorUtility.SetDirty(gameObject);
         }
+
         private void OverrideLocalization(LocalizeStringEvent stringEvent)
         {
             if (_localizationSettings == null)
@@ -121,7 +59,7 @@ namespace YoYo.UI
                     var table = _localizationSettings.StringTable;
                     var keyIndex = _localizationSettings.GetLocalizeKeyIndex();
 
-                    ValidateKeyIndex(table, keyIndex);
+                    //ValidateKeyIndex(table, keyIndex);
 
                     var key = $"{table.name}_{keyIndex}";
                     var entry = table.SharedData.AddKey(key);
@@ -141,42 +79,26 @@ namespace YoYo.UI
                     }
 
                     entry.Metadata = new MetadataCollection();
-                    entry.Metadata.AddMetadata(new Comment() {CommentText = GetTextPath(transform)});
+                    entry.Metadata.AddMetadata(new Comment { CommentText = GetTextPath(transform) });
 
-                    stringEvent.StringReference = new LocalizedString() {TableReference = table.TableCollectionName, TableEntryReference = key};
-                    
+                    stringEvent.StringReference = new LocalizedString
+                        { TableReference = table.TableCollectionName, TableEntryReference = key };
+
                     EditorUtility.SetDirty(_localizationSettings);
                     EditorUtility.SetDirty(stringEvent);
                 }
             }
         }
-        private void ValidateKeyIndex(StringTableCollection table, int keyIndex)
-        {
-            return;
-            var last = table.SharedData.Entries?.Last();
-            if (last != null)
-            {
-                string lastKey = last.Key;
-                string[] splitKey = lastKey.Split('_');
-                if (splitKey.Length > 1)
-                {
-                    if (int.TryParse(splitKey[1], out int lastIndex))
-                    {
-                        if (lastIndex >= keyIndex)
-                        {
-                            throw new AggregateException($"Localization Settings key index isn't valid. index: {keyIndex}, lastIndex: {lastIndex}");
-                        }
-                    }
-                }
-            }
-        }
+
 
         private void ResolveLocalizationSettings()
         {
             var paths = AssetDatabase.FindAssets($"t:{nameof(TextProLocalizationCollection)}");
-            if (paths is {Length: > 0})
+            if (paths is { Length: > 0 })
             {
-                _localizationSettings = AssetDatabase.LoadAssetAtPath<TextProLocalizationCollection>(AssetDatabase.GUIDToAssetPath(paths[0]));
+                _localizationSettings =
+                    AssetDatabase.LoadAssetAtPath<TextProLocalizationCollection>(
+                        AssetDatabase.GUIDToAssetPath(paths[0]));
             }
         }
 
@@ -207,6 +129,6 @@ namespace YoYo.UI
             sb.Insert(0, parentName + postfix);
             return sb.ToString();
         }
-        #endif
+#endif
     }
 }

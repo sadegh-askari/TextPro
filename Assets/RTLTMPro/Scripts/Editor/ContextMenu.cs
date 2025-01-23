@@ -25,7 +25,7 @@ namespace RTLTMPro
         ///     Create a TextMeshPro object that works with the CanvasRenderer
         /// </summary>
         /// <param name="command"></param>
-        [MenuItem("GameObject/UI/Text - RTLTMP", false, 2001)]
+        [MenuItem("GameObject/UI/Text - TextPro", false, 2001)]
         private static void CreateTextMeshProGuiObjectPerform(MenuCommand command)
         {
             // Check if there is a Canvas in the scene
@@ -47,7 +47,7 @@ namespace RTLTMPro
 
 
             // Create the RTLTextMeshPro Object
-            var go = new GameObject("Text - RTLTMP");
+            var go = new GameObject("Text - TextPro");
             var goRectTransform = go.AddComponent<RectTransform>();
 
             Undo.RegisterCreatedObjectUndo(go, "Create " + go.name);
@@ -102,10 +102,10 @@ namespace RTLTMPro
             Selection.activeGameObject = go;
         }
 
-        [MenuItem("GameObject/3D Object/Text - RTLTMP", false, 31)]
+        [MenuItem("GameObject/3D Object/Text - TextPro", false, 31)]
         private static void CreateTextMeshProObjectPerform(MenuCommand command)
         {
-            GameObject go = ObjectFactory.CreateGameObject("Text - RTLTMP");
+            GameObject go = ObjectFactory.CreateGameObject("Text - TextPro");
 
             // Add support for new prefab mode
             StageUtility.PlaceGameObjectInCurrentStage(go);
@@ -137,21 +137,21 @@ namespace RTLTMPro
             Selection.activeGameObject = go;
         }
 
-        [MenuItem("GameObject/UI/Input Field - RTLTMP", false, 2037)]
+        [MenuItem("GameObject/UI/Input Field - TextPro", false, 2037)]
         private static void AddTextMeshProInputField(MenuCommand menuCommand)
         {
             var go = RTLDefaultControls.CreateInputField(GetStandardResources());
             PlaceUIElementRoot(go, menuCommand);
         }
 
-        [MenuItem("GameObject/UI/Dropdown - RTLTMP", false, 2036)]
+        [MenuItem("GameObject/UI/Dropdown - TextPro", false, 2036)]
         public static void AddDropdown(MenuCommand menuCommand)
         {
             GameObject go = RTLDefaultControls.CreateDropdown(GetStandardResources());
             PlaceUIElementRoot(go, menuCommand);
         }
 
-        [MenuItem("GameObject/UI/Button - RTLTMP", false, 2005)]
+        [MenuItem("GameObject/UI/Button - TextPro", false, 2031)]
         public static void CreateButton(MenuCommand command)
         {
             var canvas = GetParentForNewObject().transform;

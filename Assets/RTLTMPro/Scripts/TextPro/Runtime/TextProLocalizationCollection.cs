@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEditor.Localization;
 using UnityEngine;
 
-namespace YoYo.UI
+namespace Hexagon.UI
 {
     [CreateAssetMenu(menuName = "Localization/TextPro LocalizationCollection", fileName = "TextProLocalizationCollection")]
     public class TextProLocalizationCollection : ScriptableObject
     {
-        [SerializeField] private LocalizationUser _activeUser;
+        [SerializeField] private string _activeUser;
         [SerializeField] private List<TextProLocalizationSettings> _localizationSettings;
 
         [SerializeField] private bool _overrideLocalize;
@@ -35,8 +35,8 @@ namespace YoYo.UI
 
         private TextProLocalizationSettings GetActiveSettings()
         {
-            if (_localizationSettings == null || (int)_activeUser == 0) return null;
-            return _localizationSettings.Find(settings => settings.user == _activeUser);
+            if (_localizationSettings == null || string.IsNullOrEmpty(_activeUser)) return null;
+            return _localizationSettings.Find(settings => settings.UserName.Equals(_activeUser));
         }
     }
 }
