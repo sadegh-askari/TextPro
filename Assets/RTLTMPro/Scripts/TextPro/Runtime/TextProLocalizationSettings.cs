@@ -1,3 +1,4 @@
+#if UNITY_EDITOR && UNITY_LOCALIZATION
 using UnityEngine;
 
 namespace Hexagon.UI
@@ -14,3 +15,4 @@ namespace Hexagon.UI
         }
     }
 }
+#endif

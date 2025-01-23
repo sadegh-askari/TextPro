@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if UNITY_EDITOR && UNITY_LOCALIZATION
+using System;
 using System.Collections.Generic;
 using UnityEditor.Localization;
 using UnityEngine;
@@ -40,3 +41,4 @@ namespace Hexagon.UI
         }
     }
 }
+#endif
